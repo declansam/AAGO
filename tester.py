@@ -8,6 +8,11 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 def test():
+    '''
+    Function to test the model
+    '''
+
+    # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
@@ -29,6 +34,7 @@ def test():
     
     # random visualization
     img_1 = torch.tensor([0.0]*50*50).view(50, 50)
+    
     # plot
     plt.figure(figsize=(10, 5))
     plt.imshow(img_1, cmap='YlOrRd')
@@ -36,14 +42,16 @@ def test():
     plt.tight_layout()
     plt.savefig('test_results/random_visualization.png')
     
-    
-    
+    # INFERENCE
     with torch.no_grad():
+
+        # Iterate over the dataset
         for i, (data, target) in enumerate(dataset):
             data, target = data.to(device), target.to(device)
             bs = data.size(0)
             output = model(data)
             
+            # Visualize the first prediction for each batch
             for j in range(bs):
                 
                 # Visualize the first prediction
@@ -56,6 +64,7 @@ def test():
                 first_target = target[j].cpu().detach().numpy()
                 first_target = first_target.reshape((50, 50))
                 
+                # Plot
                 plt.figure(figsize=(10, 5))
                 plt.subplot(1, 2, 1)
                 plt.imshow(first_img, cmap='YlOrRd')
@@ -67,8 +76,10 @@ def test():
                 plt.savefig(f'test_results/first_prediction-{i}-{j}.png')
                 plt.close()
             
+            # Compute loss
             val_loss += criterion(output, target).item()
     
+    # Print final validation loss
     val_loss /= len(dataset)
     print(f' Val Loss: {val_loss:.6f}')
 

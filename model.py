@@ -4,8 +4,14 @@ import math
 from config import Config
 
 class PositionalEncoding(nn.Module):
+    '''
+    Positional encoding to add to embeddings before feeding into the transformer.
+    '''
+
     def __init__(self, d_model, max_len=5000):
         super().__init__()
+
+        # Compute the positional encodings once in log space.
         pe = torch.zeros(max_len, d_model)
         position = torch.arange(0, max_len, dtype=torch.float).unsqueeze(1)
         div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
@@ -15,11 +21,19 @@ class PositionalEncoding(nn.Module):
         self.register_buffer('pe', pe)
 
     def forward(self, x):
+        '''
+        Add positional encoding to the input tensor.
+        '''
         return x + self.pe[:, :x.size(1)]
 
 class TransformerBlock(nn.Module):
+    '''
+    Transformer block with multi-head attention and feedforward layers.
+    '''
     def __init__(self, d_model, nhead, dropout=0.1):
         super().__init__()
+
+        # Multi-head attention
         self.norm1 = nn.LayerNorm(d_model)
         self.norm2 = nn.LayerNorm(d_model)
         self.attn = nn.MultiheadAttention(d_model, nhead, dropout=dropout)
@@ -29,9 +43,15 @@ class TransformerBlock(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(d_model * 4, d_model)
         )
+
+        # Dropout
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x):
+        '''
+        Forward pass of the transformer block.
+        '''
+
         # Self attention block
         att_out, _ = self.attn(x, x, x)
         x = x + self.dropout(att_out)
@@ -45,9 +65,14 @@ class TransformerBlock(nn.Module):
         return x
 
 class FireTransformer(nn.Module):
+    '''
+    Transformer model for fire spread prediction.
+    '''
+
     def __init__(self, config):
         super().__init__()
         
+        # Input normalization
         self.input_norm = nn.LayerNorm(config.GRID_SIZE + config.WEATHER_FEATURES)
         
         # Input projection
@@ -76,6 +101,10 @@ class FireTransformer(nn.Module):
         )
     
     def forward(self, x):
+        '''
+        Forward pass of the transformer model.
+        '''
+        
         # Scale inputs to [0-1]
         grid = x[..., :Config.GRID_SIZE]
         weather = x[..., Config.GRID_SIZE:]
