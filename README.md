@@ -1,7 +1,7 @@
-# Aago FAPM: Fire Area Prediction Model
+# AAGO: AI Augmented Geospatial Observation of inferno
 
 ## Overview
-This project implements a **Aago FAPM: Fire Apread Prediction Model** using a Transformer-based deep learning architecture. The model is trained on synthetic fire spread data generated using a **probabilistic BFS approach**, which considers environmental factors such as **wind speed, wind direction, and humidity**. The goal is to predict future fire spread patterns based on past fire data and weather conditions.
+This project implements a **Aago F-APM: Fire Apread Prediction Model** using a Transformer-based deep learning architecture. The model is trained on synthetic fire spread data generated using a **probabilistic BFS approach**, which considers environmental factors such as **wind speed, wind direction, and humidity**. The goal is to predict future fire spread patterns based on past fire data and weather conditions.
 
 
 ## Dataset
