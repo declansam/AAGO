@@ -56,7 +56,7 @@ pip install -r requirements.txt
 ### Dataset Generation
 To generate the fire spread dataset:
 ```python
-python generate_data.py
+python dataset_maker.py
 ```
 ### Training the Model
 Run the following command to start training:
