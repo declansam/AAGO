@@ -1,7 +1,7 @@
 # AAGO: AI Augmented Geospatial Observation of inferno
 
 ## Overview
-This project implements a **Aago F-APM: Fire Apread Prediction Model** using a Transformer-based deep learning architecture. The model is trained on synthetic fire spread data generated using a **probabilistic BFS approach**, which considers environmental factors such as **wind speed, wind direction, and humidity**. The goal is to predict future fire spread patterns based on past fire data and weather conditions.
+This project implements a **Aago F-APM: Fire Area Prediction Model** using a Transformer-based deep learning architecture. The model is trained on synthetic fire spread data generated using a **probabilistic BFS approach**, which considers environmental factors such as **wind speed, wind direction, and humidity**. The goal is to predict future fire spread patterns based on past fire data and weather conditions.
 
 
 ## Dataset
@@ -100,6 +100,12 @@ Example images from **[test_results](./test_results/)** directory:
 ![Original Fire vs Predicted Fire 1](test_results/first_prediction-0-510.png)
 ![Original Fire vs Predicted Fire 2](test_results/first_prediction-0-929.png)
 
+
+## Presentation
+[Canva](https://www.canva.com/design/DAGd5YE2aCg/J4ylepFDlGukUe4XmgjegA/edit?utm_content=DAGd5YE2aCg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+## Prototype
+[Figma](https://www.figma.com/proto/5JMDkkNWGKUyFQLEljkTcz/Aago---slush'd?page-id=0%3A1&node-id=99-728&viewport=-302%2C406%2C0.43&t=4mJ4ZvmZyl6binza-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=26%3A358)
 
 ## Contributors
 - [Avaneesh Devkota](https://github.com/avaneeshdevkota)
